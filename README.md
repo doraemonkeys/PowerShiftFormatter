@@ -34,7 +34,7 @@ Large integer constants encountered in code or data can often be opaque. For exa
 
 ### CLI Tool
 
-To install the `powershiftformatter` CLI tool:
+To install the `PowerShiftFormatter` CLI tool:
 ```bash
 go install github.com/doraemonkeys/PowerShiftFormatter@latest
 ```
@@ -65,26 +65,26 @@ func main() {
 	num1Str := "65535" // (2^16 - 1)
 	num1, _ := new(big.Int).SetString(num1Str, 10)
 
-	ok, n, m := powershiftformatter.DecomposeAsPowerOfTwoMinusOneShifted(num1)
+	ok, n, m := doraemon.DecomposeAsPowerOfTwoMinusOneShifted(num1)
 	if ok {
 		fmt.Printf("%s can be (2^%d - 1) << %d\n", num1Str, n, m)
-		_, formatted := powershiftformatter.FormatAsPowerOfTwoMinusOneShiftedBig(num1)
+		_, formatted := doraemon.FormatAsPowerOfTwoMinusOneShiftedBig(num1)
 		fmt.Printf("Formatted: %s\n", formatted) // Output: (1<<16 - 1)
 	}
 
 	num2Str := "131074" // (2^16 + 1) << 1
 	num2, _ := new(big.Int).SetString(num2Str, 10)
 
-	ok, n, m = powershiftformatter.DecomposeAsPowerOfTwoPlusOneShifted(num2)
+	ok, n, m = doraemon.DecomposeAsPowerOfTwoPlusOneShifted(num2)
 	if ok {
 		fmt.Printf("%s can be (2^%d + 1) << %d\n", num2Str, n, m)
-		_, formatted := powershiftformatter.FormatAsPowerOfTwoPlusOneShiftedBig(num2)
+		_, formatted := doraemon.FormatAsPowerOfTwoPlusOneShiftedBig(num2)
 		fmt.Printf("Formatted: %s\n", formatted) // Output: (1<<16 + 1) << 1
 	}
 
     num3Str := "16" // (2^0 + 1) << 3  = 2 << 3 = 1 << 4
     num3, _ := new(big.Int).SetString(num3Str, 10)
-    ok, formatted := powershiftformatter.FormatAsPowerOfTwoPlusOneShiftedBig(num3)
+    ok, formatted := doraemon.FormatAsPowerOfTwoPlusOneShiftedBig(num3)
     if ok {
         fmt.Printf("%s formatted: %s\n", num3Str, formatted) // Output: 1 << 4
     }
@@ -101,10 +101,10 @@ Key library functions:
 
 ### As a Command-Line Tool
 
-The CLI tool `powershiftformatter` processes an input file, searches for numbers, and attempts to replace them with their power-shift format if a decomposition is found and the number exceeds a given threshold.
+The CLI tool `PowerShiftFormatter` processes an input file, searches for numbers, and attempts to replace them with their power-shift format if a decomposition is found and the number exceeds a given threshold.
 
 ```
-Usage of powershiftformatter:
+Usage of PowerShiftFormatter:
   -i string
         Input file path (required)
   -o string
